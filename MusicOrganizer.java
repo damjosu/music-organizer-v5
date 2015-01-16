@@ -135,7 +135,7 @@ public class MusicOrganizer
     public void playFirst()
     {
         if(tracks.size() > 0) {
-            tracks.get(0)
+            tracks.get(0).incrementPlayCount();
             player.startPlaying(tracks.get(0).getFilename());
         }
     }
@@ -184,5 +184,12 @@ public class MusicOrganizer
         }
     }
     
-    
+    public void setYearOfTrack(int index, int year)
+    {
+        if (index >= 0 && index < tracks.size())
+        {
+            tracks.get(index).setYear(year);
+        }
+        
+    }
 }
