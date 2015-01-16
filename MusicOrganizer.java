@@ -15,6 +15,8 @@ public class MusicOrganizer
     private MusicPlayer player;
     // A reader that can read music files and load them as tracks.
     private TrackReader reader;
+    // Indica si hay una reproduccion en curso
+    private boolean playing;
 
     /**
      * Create a MusicOrganizer
@@ -24,6 +26,7 @@ public class MusicOrganizer
         tracks = new ArrayList<Track>();
         player = new MusicPlayer();
         reader = new TrackReader();
+        playing = false;
         readLibrary("audio");
         System.out.println("Music library loaded. " + getNumberOfTracks() + " tracks.");
         System.out.println();
@@ -53,11 +56,19 @@ public class MusicOrganizer
      */
     public void playTrack(int index)
     {
-        if(indexValid(index)) {
-            Track track = tracks.get(index);
-            track.incrementPlayCount();
-            player.startPlaying(track.getFilename());
-            System.out.println("Now playing: " + track.getArtist() + " - " + track.getTitle());
+        if (playing)
+        {
+            System.out.println("Hay una reproduccion en curso: imposible iniciar una nueva. Pare primer la que esta sonando ahora mismo");
+        }
+        else
+        {
+            if(indexValid(index)) {
+                Track track = tracks.get(index);
+                track.incrementPlayCount();
+                player.startPlaying(track.getFilename());
+                playing = true;
+                System.out.println("Now playing: " + track.getArtist() + " - " + track.getTitle());
+            }
         }
     }
     
@@ -134,10 +145,19 @@ public class MusicOrganizer
      */
     public void playFirst()
     {
-        if(tracks.size() > 0) {
-            tracks.get(0).incrementPlayCount();
-            player.startPlaying(tracks.get(0).getFilename());
+        if (playing)
+        {
+            System.out.println("Hay una reproduccion en curso: imposible iniciar una nueva. Pare primer la que esta sonando ahora mismo");
         }
+        else
+        {
+             if(tracks.size() > 0) {
+            tracks.get(0).incrementPlayCount();            
+            player.startPlaying(tracks.get(0).getFilename());
+            playing = true;
+        }
+        }
+       
     }
     
     /**
@@ -146,6 +166,7 @@ public class MusicOrganizer
     public void stopPlaying()
     {
         player.stop();
+        playing = false;
     }
 
     /**
@@ -191,5 +212,18 @@ public class MusicOrganizer
             tracks.get(index).setYear(year);
         }
         
+    }
+    
+    public void isPlaying()
+    {
+        if (playing)
+        {
+            System.out.println("Hay una reproduccion en curso");
+        }
+        
+        else
+        {
+            System.out.println("No se está reproduciendo nada en este elemento");
+        }
     }
 }
