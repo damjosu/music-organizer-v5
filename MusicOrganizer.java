@@ -55,6 +55,7 @@ public class MusicOrganizer
     {
         if(indexValid(index)) {
             Track track = tracks.get(index);
+            track.incrementPlayCount();
             player.startPlaying(track.getFilename());
             System.out.println("Now playing: " + track.getArtist() + " - " + track.getTitle());
         }
@@ -106,6 +107,17 @@ public class MusicOrganizer
         }
     }
     
+    public void findInTitle(String artist)
+    {
+       for(Track track: tracks)
+       {
+           if(track.getArtist().contains(artist))
+           {
+               System.out.println(track.getDetails());
+           }
+       }
+    }
+    
     /**
      * Remove a track from the collection.
      * @param index The index of the track to be removed.
@@ -123,6 +135,7 @@ public class MusicOrganizer
     public void playFirst()
     {
         if(tracks.size() > 0) {
+            tracks.get(0)
             player.startPlaying(tracks.get(0).getFilename());
         }
     }
@@ -170,4 +183,6 @@ public class MusicOrganizer
             addTrack(track);
         }
     }
+    
+    
 }
