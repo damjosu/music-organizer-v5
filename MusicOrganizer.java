@@ -98,6 +98,25 @@ public class MusicOrganizer
            track.incrementPlayCount();
        }
     }
+    
+    /**
+     * Plays the whole track's list in a random order, and delete each track from the list once it's already played.
+     */
+    public void playShuffle2()
+    {
+       ArrayList<Track> copy = new ArrayList<>();
+       copy = (ArrayList)tracks.clone();
+       Collections.shuffle(tracks);
+       int index = 0;
+       for (Track track : copy)
+       {
+           System.out.println(track.getDetails());
+           player.playSample(track.getFilename());
+           track.incrementPlayCount();
+           copy.remove(index); 
+           index++;
+       }        
+    }
 
     /**
      * Return the number of tracks in the collection.
