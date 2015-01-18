@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Random;
 
 /**
  * A class to hold details of audio tracks.
@@ -71,6 +72,16 @@ public class MusicOrganizer
                 System.out.println("Now playing: " + track.getArtist() + " - " + track.getTitle());
             }
         }
+    }
+    
+    /**
+     * Plays a random track.
+     */
+    public void playRandom()
+    {
+        Random r = new Random(); // Creaates a object from the class Random.
+        int randomTrack = r.nextInt(tracks.size()); // Uses nextInt method from the Random class to take one number between (0, last element's number in the index) and save it in randomTrack.
+        playTrack(randomTrack);       
     }
 
     /**
