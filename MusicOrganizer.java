@@ -153,6 +153,22 @@ public class MusicOrganizer
             tracks.remove(index);
         }
     }
+    
+    /**
+     * Removes all the introduced artist's tracks from the collection.
+     */
+    public void removeByArtist(String artist)
+    {
+        Iterator<Track> it = tracks.iterator();
+        while (it.hasNext())
+        {
+            Track track = it.next();
+            if (track.getArtist().contains(artist)) // Uses the Track's method getArtist to find the track's artists that matches with the given one.
+            {
+                it.remove();
+            }
+        }
+    }
 
     /**
      * Play the first track in the collection, if there is one.
