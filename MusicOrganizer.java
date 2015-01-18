@@ -169,6 +169,22 @@ public class MusicOrganizer
             }
         }
     }
+    
+    /**
+     * Removes all the tracks that matches with the introcuded title.
+     */
+    public void removeByTitle(String title)
+    {
+        Iterator<Track> it = tracks.iterator();
+        while (it.hasNext())
+        {
+            Track track = it.next();
+            if (track.getTitle().contains(title))// Uses the Track's method getTitle to find the track's titles that matches with the given one.
+            {
+                it.remove();
+            }
+        }
+    }
 
     /**
      * Play the first track in the collection, if there is one.
